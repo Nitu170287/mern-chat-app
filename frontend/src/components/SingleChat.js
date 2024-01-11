@@ -1,7 +1,7 @@
 import { FormControl } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { Box, Text } from "@chakra-ui/layout";
-import "./style.css"
+import "./style.css";
 import { IconButton, Spinner, useToast } from "@chakra-ui/react";
 import { getSender, getSenderFull } from "../config/ChatLogics";
 import { useEffect, useState } from "react";
@@ -15,7 +15,7 @@ import animationData from "../animations/typing.json";
 import io from "socket.io-client";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import { ChatState } from "../context/chatProvider";
-const ENDPOINT = "http://localhost:5000"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
+const ENDPOINT = "https://mern-chat-service-soja.onrender.com"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -85,11 +85,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           "/api/message",
           {
             content: newMessage,
-            chatId: selectedChat._id,  //chatId: selectedChat,
+            chatId: selectedChat._id, //chatId: selectedChat,
           },
           config
         );
-        
+
         socket.emit("new message", data);
         setMessages([...messages, data]);
       } catch (error) {
@@ -208,7 +208,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             borderRadius="lg"
             overflowY="hidden"
           >
-          {/* message */}
+            {/* message */}
             {loading ? (
               <Spinner
                 size="xl"
@@ -253,7 +253,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         </>
       ) : (
         // to get socket.io on same page
-        <Box display="flex" alignItems="center" justifyContent="center" h="100%">
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          h="100%"
+        >
           <Text fontSize="3xl" pb={3} fontFamily="Work sans">
             Click on a user to start chatting
           </Text>
